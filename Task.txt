@@ -1,0 +1,263 @@
+1.Create a database called "guvizenclass" and
+create database guvizenclass;
+show databases;
+use guvizenclass;
+select database();
+show tables;
+
+                ************************************************************
+
+2.Create a table called "Students" with the following columns:
+id      : int, primary key, auto_increment
+name    : varchar(255), not null
+age     : int, not null
+phone   : varchar(255), not null, unique
+address : varchar(255), not null
+
+Insert the following records into the table "students":
+1, "Sachin",  45, "9188888888", "91, periyar street, Erode   , 638011"
+2, "Dhoni",   35, "9288888888", "92, gandhij street, Salem   , 638012"
+3, "Kohli",   25, "9388888888", "93, nehru   street, Covai   , 638013"
+4, "Messi",   40, "9488888888", "94, V.K     street, Theni   , 638014"
+5, "Ronaldo", 30, "9588888888", "95, Kamaraj street, Madurai , 638015"
+
+
+create table Students (id int primary key auto_increment,name varchar(255) not null,age int not null,phone varchar(255) not null unique,address varchar(255) not null);
+
+insert into Students values (1, "Sachin",  45, "9188888888", "91, periyar street, Erode   , 638011"),(2, "Dhoni",   35, "9288888888", "92, gandhij street, Salem   , 638012"),(3, "Kohli",   25, "9388888888", "93, nehru   street, Covai   , 638013"),(4, "Messi",   40, "9488888888", "94, V.K     street, Theni   , 638014"),(5, "Ronaldo", 30, "9588888888", "95, Kamaraj street, Madurai , 638015");
+
+select * from Students;
+
+                ************************************************************
+
+3.Create a table called "Login" with the following columns:
+id       : int, primary key, auto_increment
+email    : varchar(255), not null, unique
+password : varchar(255), not null, unique
+
+Insert the following records into the table "Login":
+1, "sachin9600@gmail.com" , "abcde"
+2, "dhoni9600@gmail.com"  , "fghij"
+3, "kholi9600@gmail.com"  , "klmno"
+4, "messi9600@gmail.com"  , "pqrst"
+5, "ronaldo9600@gmail.com", "uvwxy"
+
+create table Login (id int primary key auto_increment,email varchar(255) not null unique,password varchar(255) not null unique);
+
+insert into Login values (1, "sachin9600@gmail.com" , "abcde"),(2, "dhoni9600@gmail.com"  , "fghij"),(3, "kholi9600@gmail.com"  , "klmno"),(4, "messi9600@gmail.com"  , "pqrst"),(5, "ronaldo9600@gmail.com", "uvwxy");
+
+select * from Login;
+
+                ************************************************************
+
+4.Create a table called "Batch" with the following columns:
+id            : int, primary key, auto_increment
+batch         : varchar(255), not null
+time          : varchar(255), not null
+status        : varchar(255), not null
+
+Insert the following records into the table "Batch":
+101,"B49", "Morning 9:30", "tamil batch"
+102,"B50","Evening 04:00", "english batch"
+103,"B51","Morning 11:00", "english batch"
+104,"B52","Evening 06:00", "tamil batch"
+105,"B53","Evening 06:00", "english batch"
+
+
+create table Batch (id int primary key auto_increment,batch varchar(255) not null,time varchar(255) not null, status varchar(255) not null);
+
+insert into Batch values (101,"B49", "Morning 9:30", "tamil batch"),(102,"B50","Evening 04:00", "english batch"),(103,"B51","Morning 11:00", "english batch"),(104,"B52","Evening 06:00", "tamil batch"),(105,"B53","Evening 06:00", "english batch");
+
+select * from Batch;
+
+                ************************************************************
+
+5.Create a table called "Roadmap" with the following columns:
+id         : int, primary key, auto_increment
+number     : int,not null
+date       : date, not null
+student_id : int, foreign key references students(id)
+
+Insert the following records into the table "Roadmap":
+101,1, "2023-11-26", 1
+102,2, "2023-11-27", 2
+103,3, "2023-11-28", 3
+104,4, "2023-11-29", 4
+105,5, "2023-11-30", 5
+
+
+create table Roadmap(id int primary key auto_increment,number int not null,date date not null,student_id int);
+
+alter table Roadmap add constraint student_id foreign key (student_id) references students(id); 
+
+insert into Roadmap values(101,1, "2023-11-26", 1),(102,2, "2023-11-27", 2),(103,3, "2023-11-28", 3),(104,4, "2023-11-29", 4),(105,5, "2023-11-30", 5);
+
+select * from Roadmap;
+
+                ************************************************************
+
+6.Create a table called "JoinClass" with the following columns:
+id         : int, primary key, auto_increment
+date       : date, not null
+student_id : int, foreign key references students(id)
+link       : varchar(255), not null   
+
+Insert the following records into the table "JoinClass":
+101,"2023-11-26", 1, "https://www.guvi.in/"
+102,"2023-11-27", 2, "https://www.zenclass.in/class"
+103,"2023-11-28", 3, "https://www.guvi.in/courses/"
+104,"2023-11-29", 4, "https://www.guvi.in/code-kata/"
+105,"2023-11-30", 5, "https://www.guvi.in/webkata/"
+
+create table JoinClass(id int primary key auto_increment,date date not null,student_id int,foreign key(student_id) references students(id),link varchar(255) not null);
+
+insert into JoinClass values (101,"2023-11-26", 1, "https://www.guvi.in/"),(102,"2023-11-27", 2, "https://www.zenclass.in/class"),(103,"2023-11-28", 3, "https://www.guvi.in/courses/"),(104,"2023-11-29", 4, "https://www.guvi.in/code-kata/"),(105,"2023-11-30", 5, "https://www.guvi.in/webkata/");
+
+select * from JoinClass ;
+
+                ************************************************************
+
+7.Create a table called "RecordClass" with the following columns:
+id         : int, primary key, auto_increment
+date       : date, not null
+student_id : int, foreign key references students(id)
+link       : varchar(255), not null
+
+Insert the following records into the table "RecordClass":
+101,"2023-11-26", 1, "https://us06web.zoom.us/rec/share/NJS6MjDxUgLdHu_xSY22Ys2oQfy716E2TtzQylYBpWOVF1TKe7DRA1kNb0rilb20.L0hBN_0MAoV2h84J"
+102,"2023-11-27", 2, "https://us06web.zoom.us/rec/play/6Wui8GG45Pw9jAbQWQDcKV7Q1hXNc6Aclk5AscxLE0ac1PZmau8MHL6BIgk640aj_6Ig2KBZJd7g7Ili.3NBqpqaeiT4D969b"
+103,"2023-11-28", 3, "https://us06web.zoom.us/rec/share/Mjb73WQpU0Xpc9pcQtLMff__5hlqtch-RSM5IJHlbQAa6PRRCW2iBCwGWYRazdCg.WzXZzpVHNWSSnqzP"
+104,"2023-11-29", 4, "https://us06web.zoom.us/rec/share/FngmcjYRAZ2ihhPhiNhxZKhRsDFYI7YaUXyT0SnBAtstXI6zZjroWQDP2jfpRzAK.I5BU2YfuxzS1jV3s"
+105,"2023-11-30", 5, "https://us06web.zoom.us/rec/share/8tHJMhy6megwGbI-u8QsAJ8ErQk6VbeTgkFdGuruOmdCCTUtOVxAMsLi9Hl2REgZ.A0fwwuYIvOkSHgqm"
+
+
+create table RecordClass(id int primary key auto_increment,date date not null,student_id int,foreign key(student_id) references students(id),link varchar(255) not null);
+
+insert into RecordClass values(101,"2023-11-26", 1, "https://us06web.zoom.us/rec/share/NJS6MjDxUgLdHu_xSY22Ys2oQfy716E2TtzQylYBpWOVF1TKe7DRA1kNb0rilb20.L0hBN_0MAo"),(102,"2023-11-27", 2, "https://us06web.zoom.us/rec/play/6Wui8GG45Pw9jAbQWQDcKV7Q1hXNc6Aclk5AscxLE0ac1PZmau8MHL6BIgk640aj_6Ig2KBZJd7g"),(103,"2023-11-28", 3, "https://us06web.zoom.us/rec/share/Mjb73WQpU0Xpc9pcQtLMff__5hlqtch-RSM5IJHlbQAa6PRRCW2iBCwGWYRazdCg.WzXZzpVHNW"),(104,"2023-11-29", 4, "https://us06web.zoom.us/rec/share/FngmcjYRAZ2ihhPhiNhxZKhRsDFYI7YaUXyT0SnBAtstXI6zZjroWQDP2jfpRzAK.I5BU2Yfuxz"),(105,"2023-11-30", 5, "https://us06web.zoom.us/rec/share/8tHJMhy6megwGbI-u8QsAJ8ErQk6VbeTgkFdGuruOmdCCTUtOVxAMsLi9Hl2REgZ.A0fwwuYIvO");
+
+select * from RecordClass;
+
+                ************************************************************
+
+8.Create a table called "Feedback" with the following columns:
+id              : int, primary key, auto_increment
+rating          : int, not null
+sessionfeedback : varchar(255), not null
+content         : int, not null,
+mentorfeedback  : varchar(255), not null
+comments        : varchar(255), not null
+
+Insert the following records into the table "Feedback":
+1,5star,Excellent,Java,  Excellent,"Learned the training Java course today"
+2,4star,Good,     HTML,  Good,     "Learned the training HTML course today"
+3,3star,Poor,     CSS,   Poor,     "Learned the training CSS course today"
+4,2star,Not Bad,  REACT, Not Bad,  "Learned the training React course today"
+5,1star,OK,       SQL,   OK,       "Learned the training SQL course today"
+
+
+create table Feedback(id int primary key auto_increment,rating int not null,sessionfeedback varchar(255) not null,content varchar(255) not null,mentorfeedback  varchar(255) not null,comments varchar(255) not null);
+
+insert into Feedback values(1,5,"Excellent","Java" ,  "Excellent", "Learned the training Java course today"),(2,4,"Good",     "HTML" ,  "Good",      "Learned the training HTML course today"),(3,3,"Poor",     "CSS"  ,  "Poor",      "Learned the training CSS course today"),(4,2,"Not Bad",  "REACT",  "Not Bad",   "Learned the training React course today"),(5,1,"OK",        "SQL"  ,   "OK",      "Learned the training SQL course today");
+
+select * from Feedback;
+
+                ************************************************************
+
+9.Create a table called "Courses" with the following columns:
+id          : int, primary key, auto_increment
+course_name : varchar(255), not null
+instructor  : varchar(255), not null
+fees        : int, not null
+duration    : varchar(255), not null
+
+Insert the following records into the table "Courses":
+1,"Introduction to Basic Programming", "Ram", 20000, "3months"
+2,"Python", "Deepan", 50000, "4months"
+3,"Web designer", "Karan", 60000, "5months"
+4,"Full stack developer", "Rupan", 75000, "6months"
+
+create table Courses(id  int primary key auto_increment,course_name varchar(255) not null,instructor varchar(255) not null,fees int not null,duration varchar(255) not null);
+
+insert into Courses values (1,"Introduction to Basic Programming", "Ram", 20000, "3months"),(2,"Python", "Deepan", 50000, "4months"),(3,"Web designer", "Karan", 60000, "5months"),(4,"Full stack developer", "Rupan", 75000, "6months");
+
+select * from Courses;
+
+                ************************************************************
+
+10.Create a table called "Submit" with the following columns:
+id           : int, primary key, auto_increment,
+project_name : varchar(255), not null,
+submit_date  : date , not null,
+comments     : varchar(255), not null
+
+Insert the following records into the table "Submit":
+1,"Travel Landing Project", "2023-09-15", "Submitted my Travel Landing Project"
+2,"Bootstrap Project",      "2023-09-16", "Submitted my Bootstrap Project"
+3,"CRUD Project",           "2023-09-17", "Submitted my CRUD Project"
+4,"React Project",          "2023-09-18", "Submitted my React Project"
+5,"Web Designing Project",  "2023-09-19", "Submitted my  Web Designing Project"
+
+
+create table Submit(id int primary key auto_increment,project_name varchar(255) not null,submit_date date not null,comments varchar(255) not null);
+
+insert into Submit values (1,"Travel Landing Project", "2023-09-15", "Submitted my Travel Landing Project"),(2,"Bootstrap Project",      "2023-09-16", "Submitted my Bootstrap Project"),(3,"CRUD Project",           "2023-09-17", "Submitted my CRUD Project"),(4,"React Project",          "2023-09-18", "Submitted my React Project"),(5,"Web Designing Project",  "2023-09-19", "Submitted my  Web Designing Project");
+
+select * from Submit;
+
+                ************************************************************
+
+11.Create a table called "NavBars" with the following columns:
+
+    id           : int, primary key, auto_increment,
+    barnames     : varchar(255), not null,
+    link         : varchar(255), not null,
+    bar_id       : int, not null,
+    student_id    : int, foreign key references students(id)
+
+Insert the following records into the table "Bars":
+
+1, "Home" ,         "https://www.zenclass.in/class", 1, 1
+2, "Class",         "https://www.zenclass.in/class", 2, 2
+3, "Dashboard",     "https://www.zenclass.in/dashboard", 3, 3
+4, "Task",          "https://www.zenclass.in/tasks"  , 4, 4
+5, "Queries",       "https://www.zenclass.in/queries", 1, 5
+6, "Portfolio",     "https://www.zenclass.in/portfolio", 4, 1
+7, "Mock-Interview","https://www.zenclass.in/mock-interview", 1, 2
+8, "Placement",     "https://www.zenclass.in/placement", 2, 3
+
+
+create table Barname(
+id int primary key auto_increment,
+barnames varchar(255) not null,
+link varchar(255) not null,
+bar_id int not null,
+student_id int,foreign key(student_id) references students(id));
+
+insert into Barname values 
+(1, "Home" ,         "https://www.zenclass.in/class", 1, 1),
+(2, "Class",         "https://www.zenclass.in/class", 2, 2),
+(3, "Dashboard",     "https://www.zenclass.in/dashboard", 3, 3),
+(4, "Task",          "https://www.zenclass.in/tasks"  , 4, 4),
+(5, "Queries",       "https://www.zenclass.in/queries", 1, 5),
+(6, "Portfolio",     "https://www.zenclass.in/portfolio", 4, 1),
+(7, "Mock-Interview","https://www.zenclass.in/mock-interview", 1, 2),
+(8, "Placement",     "https://www.zenclass.in/placement", 2, 3);
+
+select * from Barname;
+
+                ************************************************************
+
+show tables;
+
+barname
+batch
+courses
+feedback
+joinclass
+login
+recordclass
+roadmap
+students
+submit
+
+*************************************************************************************************************************
